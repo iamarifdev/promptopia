@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 
 import { Post } from '@/components/interfaces/post';
 import Profile from '@/components/Profile';
@@ -24,11 +24,13 @@ const UserProfile = ({ params }: { params: { id: string } }) => {
   }, [params.id]);
 
   return (
-    <Profile
-      name={userName!}
-      desc={`Welcome to ${userName}'s personalized profile page. Explore ${userName}'s exceptional prompts and be inspired by the power of their imagination`}
-      data={userPosts}
-    />
+    <Suspense>
+      <Profile
+        name={userName!}
+        desc={`Welcome to ${userName}'s personalized profile page. Explore ${userName}'s exceptional prompts and be inspired by the power of their imagination`}
+        data={userPosts}
+      />
+    </Suspense>
   );
 };
 
